@@ -1,0 +1,69 @@
+<!doctype HTML>
+<head>
+  <style>
+      .background {
+  background: rgb(34, 138, 179);
+  table-layout: fixed;
+  border-spacing: 0;
+}
+
+.background td {
+  padding: 0;
+}
+
+.lava {
+  background: rgb(255, 100, 100);
+}
+
+.acid {
+  background: rgb(47, 190, 59);
+}
+
+.wall {
+  background: rgb(94, 75, 12);
+}
+
+.actor {
+  position: absolute;
+}
+
+.coin {
+  background: rgb(241, 229, 89);
+}
+
+.player {
+  background: rgb(255, 140, 249);
+}
+
+.lost .player {
+  background: rgb(160, 64, 64);
+}
+
+.won .player {
+  box-shadow: -4px -7px 8px white, 4px -7px 8px white;
+}
+
+/*Defines game viewport*/
+.game {
+  overflow: hidden;
+  max-width: 600px;
+  max-height: 450px;
+  position: relative;
+}
+  </style>
+  <script src="/../../public/js/platformer.js" type="application/javascript"></script>
+</head>
+<body>
+  Collect all the coins!
+  Avoid the lava and the acid.
+  </br>
+    Controls:
+  </br>
+  Arrow key left: move left
+  </br>
+  Arrow key right: move right
+  </br>
+  Arrow key up: jump
+  </br>
+  Escape: Pause/Resume
+</body>

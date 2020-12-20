@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Hop Hop Block</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .navbar-expand-md {
+      font-family: "Consolas";
+    }
+
+    .navbar-nav {
+      font-family: "Century Gothic"
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #fbe1fc" ;>
+    <a class="navbar-brand" href="login">
+      <img src="https://image.flaticon.com/icons/png/512/10/10536.png" width="30" height="30"
+        class="d-inline-block align-top" alt="">
+      hop hop block.
+    </a>
+    <form class="form-inline">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </form>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav ml-auto">
+        {{#if user}}
+        <li class="nav-item">
+          <a class="nav-link" href="/">home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/logout">log out.</a>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/users/login">log in.</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/register">join the challenge!</a>
+        </li>
+        {{/if}}
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main">
+        {{{body}}}
+        {{#if success_msg}}
+        <div class="alert alert-succes" role="alert">{{success_msg}}</div>
+        {{/if}}
+        {{#if error_msg}}
+        <div class="alert alert-danger" role="alert">{{error_msg}}</div>
+        {{/if}}
+        {{#if error}}
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+        {{/if}}
+      <footer class="container">
+        <p>&copy; Dream team 2020</p>
+      </footer>
+    </div>
+  </main>
+</body>
+
+</html>
