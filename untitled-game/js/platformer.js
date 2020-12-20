@@ -17,8 +17,25 @@ var actorChars = {
   "v": Acid
 };
 
+var Level = require('./levels');
 
-var levelPlans = [[
+function loadLevels() {
+  Level.getLevel("1", function (err, level) {
+    var res = level.name.split("\n");
+    levelPlans.push(res);
+  });
+  Level.getLevel("2", function (err, level) {
+    var res = level.name.split("\n");
+    levelPlans.push(res);
+  });
+  Level.getLevel("3", function (err, level) {
+    var res = level.name.split("\n");
+    levelPlans.push(res);
+  });
+}
+
+var levelPlans = [];
+var templevelPlans = [[
   "########################################################|##########v##############################",
   "#                                                                                                #",
   "#                                                                                                #",
