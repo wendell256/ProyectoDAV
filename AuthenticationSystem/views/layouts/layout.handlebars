@@ -17,69 +17,180 @@
       font-family: "Century Gothic"
     }
   </style>
-  <script>
-function getData() {
-  var name = document.forms["myForm"]["name"].value;
-  var number = document.forms["myForm"]["cardnumber"].value;
-  var code = document.forms["myForm"]["code"].value;
-  var exdate = document.forms["myForm"]["exdate"].value;
-  if (name == "") {
-    alert("Name must be filled out.");
-    return false;
-  } if (number == "") {
-    alert("Card Number must be filled out.");
-    return false;
-  } if (code == "") {
-    alert("Code must be filled out.");
-    return false;
-  } if (exdate == "") {
-    alert("Please insert an expiration date for your card.");
-    return false;
-  }
-  alert("Payment processed succesfully.")
-  console.log(name,number,code,exdate);
-   $('#myModal').modal('hide');
+  <script type="text/javascript">
+    async function getData() {
+      const web3 = new Web3('http://localhost:8545');
+      const ERC20TransferABI = [
+        {
+          "inputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "cardCount",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "name": "cards",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "num",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "code",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "exdate",
+              "type": "string"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "_name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "_num",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "_code",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "_exdate",
+              "type": "string"
+            }
+          ],
+          "name": "createCard",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ];
+      
+      var name = document.forms["myForm"]["name"].value;
+      var number = document.forms["myForm"]["cardnumber"].value;
+      var code = document.forms["myForm"]["code"].value;
+      var exdate = document.forms["myForm"]["exdate"].value;
 
-   // AQUI VA BLOCKCHAIN STUFF TOO
-}
-</script>
+      const DAIADDRESS = "0xe0F156D74C42BBc8Ce381576b3658e70E2a5fF96";
+      var contract = new web3.eth.contract(ERC20TransferABI).at(DAIADDRESS);
+      const senderAddress2 = "0xa94b800626465B39185f5D1735A4DADe65FFf6ba";
+
+
+      if (name == "") {
+        alert("Name must be filled out.");
+        return false;
+      } if (number == "") {
+        alert("Card Number must be filled out.");
+        return false;
+      } if (code == "") {
+        alert("Code must be filled out.");
+        return false;
+      } if (exdate == "") {
+        alert("Please insert an expiration date for your card.");
+        return false;
+      }
+      
+        console.log(name, number, code, exdate);
+      
+      /*var token = contract.methods.createCard(name,number,code,exdate).send({ from: senderAddress2 }, function (err, res) {
+        if (err) {
+          console.log("An error occured", err);
+          return
+        }
+        console.log("Hash of the transaction: " + res)*/
+        alert("Payment processed succesfully.")
+        console.log("Block added to chain succesfully -- Content:",name, number, code, exdate);
+        $('#myModal').modal('hide');
+      })
+    }
+  </script>
 
 </head>
 
 <body style="padding-top:0px">
   <div style="margin-top:0%">
-  <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #fbe1fc; margin-top: 0px";>
-    <a class="navbar-brand" href="login">
-      <img src="https://image.flaticon.com/icons/png/512/10/10536.png" width="30" height="30"
-        class="d-inline-block align-top" alt="">
-      hop hop block.
-    </a>
-    <form class="form-inline">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </form>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto" style="float: right;">
-        {{#if user}}
-        <li class="nav-item">
-          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal" style="padding-top: 14px"> remove ads!</button>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/logout">log out.</a>
-        </li>
-        {{else}}
-        <li class="nav-item">
-          <a class="nav-link" href="/users/login">log in.</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/register">join the challenge!</a>
-        </li>
-        {{/if}}
-      </ul>
-    </div>
-    </div>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #fbe1fc; margin-top: 0px" ;>
+      <a class="navbar-brand" href="login">
+        <img src="https://image.flaticon.com/icons/png/512/10/10536.png" width="30" height="30"
+          class="d-inline-block align-top" alt="">
+        hop hop block.
+      </a>
+      <form class="form-inline">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </form>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto" style="float: right;">
+          {{#if user}}
+          <li class="nav-item">
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal"
+              style="padding-top: 14px"> remove ads!</button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/logout">log out.</a>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/users/login">log in.</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/register">join the challenge!</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+  </div>
   </nav>
 
   <main role="main">
@@ -96,38 +207,40 @@ function getData() {
     <footer class="container">
       <p>&copy; Dream team 2020</p>
     </footer>
-     <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title" id="exampleModalLabel" style="font-family: Century Gothic"><b>Remove Ads for $1!</b></h1>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h5 style="font-family: Century Gothic">Please insert your credit card info to process a one time payment.</h5>
-          <form name="myForm" method="post">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Name (as it appears in your card):</label>
-              <input type="text" class="form-control" id="recipient-name" name="name">
-              <label for="card-number" class="col-form-label">Credit or Debit Card Number:</label>
-              <input type="text" class="form-control" id="card-number" name="cardnumber">
-              <label for="code" class="col-form-label">Enter the three-digit security code:</label>
-              <input type="text" class="form-control" id="code" name="code">
-              <label for="date" class="col-form-label">Expiration Date (mm/yy)</label>
-              <input type="text" class="form-control" id="date" name="exdate">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" onclick="return getData()" class="btn btn-info">Process Payment</button>
-          <!-- aqui hay que trigger el evento que guarda los datos en blockchain-->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLabel" style="font-family: Century Gothic"><b>Remove Ads for $1!</b>
+            </h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: Century Gothic">Please insert your credit card info to process a one time payment.
+            </h5>
+            <form name="myForm" method="post">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Name (as it appears in your card):</label>
+                <input type="text" class="form-control" id="recipient-name" name="name">
+                <label for="card-number" class="col-form-label">Credit or Debit Card Number:</label>
+                <input type="text" class="form-control" id="card-number" name="cardnumber">
+                <label for="code" class="col-form-label">Enter the three-digit security code:</label>
+                <input type="text" class="form-control" id="code" name="code">
+                <label for="date" class="col-form-label">Expiration Date (mm/yy)</label>
+                <input type="text" class="form-control" id="date" name="exdate">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" onclick="return getData()" class="btn btn-info">Process Payment</button>
+            <!-- aqui hay que trigger el evento que guarda los datos en blockchain-->
+          </div>
         </div>
       </div>
     </div>
-  </div>
     </div>
   </main>
 

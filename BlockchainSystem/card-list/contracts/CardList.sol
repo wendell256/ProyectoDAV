@@ -15,6 +15,8 @@ contract CardList {
 
      constructor() public {
       createCard("Andrea", "0801200000240", "504", "12/20");
+      createCard("Wendell", "080119000240", "234", "12/20");
+      createCard("Jose", "0801201000240", "765", "12/20");
    }
    
   function createCard(string memory _name, string memory _num, string memory _code, string memory _exdate) public {
