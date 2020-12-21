@@ -17,25 +17,27 @@ var actorChars = {
   "v": Acid
 };
 
-var Level = require('./levels');
+/*var Level = require('./levels');
 
 function loadLevels() {
   Level.getLevel("1", function (err, level) {
-    var res = level.name.split("\n");
+    var res = level.name.split("-");
     levelPlans.push(res);
   });
   Level.getLevel("2", function (err, level) {
-    var res = level.name.split("\n");
+    var res = level.name.split("-");
     levelPlans.push(res);
   });
   Level.getLevel("3", function (err, level) {
-    var res = level.name.split("\n");
+    var res = level.name.split("-");
     levelPlans.push(res);
   });
-}
+  console.log("aqui estan");
+  console.log(levelPlans);
+}*/
 
-var levelPlans = [];
-var templevelPlans = [[
+var templevelPlans = [];
+var levelPlans = [[
   "########################################################|##########v##############################",
   "#                                                                                                #",
   "#                                                                                                #",
@@ -139,6 +141,7 @@ var ready = function (f) {
 
 // Create level and show game.
 ready(function () {
+  //loadLevels();
   runGame(levelPlans, DOMDisplay);
 });
 

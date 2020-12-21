@@ -32,6 +32,8 @@ function loadLevels() {
     var res = level.name.split("-");
     levelPlans.push(res);
   });
+  console.log("aqui estan");
+  console.log(levelPlans);
 }
 
 var levelPlans = [];
@@ -139,6 +141,7 @@ var ready = function (f) {
 
 // Create level and show game.
 ready(function () {
+  loadLevels();
   runGame(levelPlans, DOMDisplay);
 });
 
