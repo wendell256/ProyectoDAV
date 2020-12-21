@@ -5,6 +5,9 @@
   <title>Hop Hop Block</title>
   <link rel="stylesheet" href="/css/bootstrap.css">
   <link rel="stylesheet" href="/css/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <style>
     .navbar-expand-md {
       font-family: "Consolas";
@@ -13,13 +16,13 @@
     .navbar-nav {
       font-family: "Century Gothic"
     }
-
   </style>
 
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #fbe1fc" ;>
+<body style="padding-top:0px">
+  <div style="margin-top:0%">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #fbe1fc; margin-top: 0px";>
     <a class="navbar-brand" href="login">
       <img src="https://image.flaticon.com/icons/png/512/10/10536.png" width="30" height="30"
         class="d-inline-block align-top" alt="">
@@ -32,10 +35,10 @@
       </button>
     </form>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto" style="float: right;">
         {{#if user}}
         <li class="nav-item">
-          <a class="nav-link" href="/">home <span class="sr-only">(current)</span></a>
+          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal" style="padding-top: 14px"> remove ads!</button>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/users/logout">log out.</a>
@@ -50,24 +53,58 @@
         {{/if}}
       </ul>
     </div>
+    </div>
   </nav>
 
   <main role="main">
-        {{{body}}}
-        {{#if success_msg}}
-        <div class="alert alert-succes" role="alert">{{success_msg}}</div>
-        {{/if}}
-        {{#if error_msg}}
-        <div class="alert alert-danger" role="alert">{{error_msg}}</div>
-        {{/if}}
-        {{#if error}}
-        <div class="alert alert-danger" role="alert">{{error}}</div>
-        {{/if}}
-      <footer class="container">
-        <p>&copy; Dream team 2020</p>
-      </footer>
+    {{{body}}}
+    {{#if success_msg}}
+    <div class="alert alert-succes" role="alert">{{success_msg}}</div>
+    {{/if}}
+    {{#if error_msg}}
+    <div class="alert alert-danger" role="alert">{{error_msg}}</div>
+    {{/if}}
+    {{#if error}}
+    <div class="alert alert-danger" role="alert">{{error}}</div>
+    {{/if}}
+    <footer class="container">
+      <p>&copy; Dream team 2020</p>
+    </footer>
+     <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exampleModalLabel" style="font-family: Century Gothic"><b>Remove Ads for $1!</b></h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5 style="font-family: Century Gothic">Please insert your credit card info to process a one time payment.</h5>
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Name (as it appears in your card):</label>
+              <input type="text" class="form-control" id="recipient-name">
+              <label for="card-number" class="col-form-label">Credit or Debit Card Number:</label>
+              <input type="text" class="form-control" id="card-number">
+              <label for="code" class="col-form-label">Enter the three-digit security code:</label>
+              <input type="text" class="form-control" id="code">
+              <label for="date" class="col-form-label">Expiration Date (mm/yy)</label>
+              <input type="text" class="form-control" id="date">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info">Process Payment</button>
+          <!-- aqui hay que trigger el evento que guarda los datos en blockchain-->
+        </div>
+      </div>
+    </div>
+  </div>
     </div>
   </main>
+
 </body>
 
 </html>
