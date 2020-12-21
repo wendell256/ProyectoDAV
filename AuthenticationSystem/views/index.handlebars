@@ -62,7 +62,7 @@
     /*
     @ - Player start location
     o - Coin
-    = - Lava moves horizontally
+    u - Lava moves horizontally
     | - Lava moves vertically
     v - Dripping Acid
     + - Acid
@@ -70,7 +70,7 @@
     var actorChars = {
       "@": Player,
       "o": Coin,
-      "=": Lava,
+      "u": Lava,
       "|": Lava,
       "v": Acid
     };
@@ -87,9 +87,8 @@
       var level1Arr = level1.split('-');
       var level2Arr = level2.split('-');
       var level3Arr = level3.split('-');
-      var i;
-      var j;
 
+      console.log(level2Arr);
       levelPlans.push(level1Arr);
       levelPlans.push(level2Arr);
       levelPlans.push(level3Arr);
@@ -297,7 +296,7 @@
     function Lava(pos, ch) {
       this.pos = pos;
       this.size = new Vector(1, 1);
-      if (ch == "=") {
+      if (ch == "u") {
         this.speed = new Vector(2, 0);
       } else if (ch == "|") {
         this.speed = new Vector(0, 2);
