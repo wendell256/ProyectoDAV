@@ -17,6 +17,32 @@
       font-family: "Century Gothic"
     }
   </style>
+  <script>
+function getData() {
+  var name = document.forms["myForm"]["name"].value;
+  var number = document.forms["myForm"]["cardnumber"].value;
+  var code = document.forms["myForm"]["code"].value;
+  var exdate = document.forms["myForm"]["exdate"].value;
+  if (name == "") {
+    alert("Name must be filled out.");
+    return false;
+  } if (number == "") {
+    alert("Card Number must be filled out.");
+    return false;
+  } if (code == "") {
+    alert("Code must be filled out.");
+    return false;
+  } if (exdate == "") {
+    alert("Please insert an expiration date for your card.");
+    return false;
+  }
+  alert("Payment processed succesfully.")
+  console.log(name,number,code,exdate);
+   $('#myModal').modal('hide');
+
+   // AQUI VA BLOCKCHAIN STUFF TOO
+}
+</script>
 
 </head>
 
@@ -81,22 +107,22 @@
         </div>
         <div class="modal-body">
           <h5 style="font-family: Century Gothic">Please insert your credit card info to process a one time payment.</h5>
-          <form>
+          <form name="myForm" method="post">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Name (as it appears in your card):</label>
-              <input type="text" class="form-control" id="recipient-name">
+              <input type="text" class="form-control" id="recipient-name" name="name">
               <label for="card-number" class="col-form-label">Credit or Debit Card Number:</label>
-              <input type="text" class="form-control" id="card-number">
+              <input type="text" class="form-control" id="card-number" name="cardnumber">
               <label for="code" class="col-form-label">Enter the three-digit security code:</label>
-              <input type="text" class="form-control" id="code">
+              <input type="text" class="form-control" id="code" name="code">
               <label for="date" class="col-form-label">Expiration Date (mm/yy)</label>
-              <input type="text" class="form-control" id="date">
+              <input type="text" class="form-control" id="date" name="exdate">
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-info">Process Payment</button>
+          <button type="submit" onclick="return getData()" class="btn btn-info">Process Payment</button>
           <!-- aqui hay que trigger el evento que guarda los datos en blockchain-->
         </div>
       </div>
