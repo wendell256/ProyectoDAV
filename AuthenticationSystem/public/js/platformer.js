@@ -1,4 +1,5 @@
 // Maximum time step in seconds.
+
 var maxStep = 0.05;
 
 /*
@@ -17,24 +18,14 @@ var actorChars = {
   "v": Acid
 };
 
-/*var Level = require('./levels');
+
 
 function loadLevels() {
-  Level.getLevel("1", function (err, level) {
-    var res = level.name.split("-");
-    levelPlans.push(res);
-  });
-  Level.getLevel("2", function (err, level) {
-    var res = level.name.split("-");
-    levelPlans.push(res);
-  });
-  Level.getLevel("3", function (err, level) {
-    var res = level.name.split("-");
-    levelPlans.push(res);
-  });
+
+
   console.log("aqui estan");
   console.log(levelPlans);
-}*/
+}
 
 var templevelPlans = [];
 var levelPlans = [[
@@ -141,7 +132,7 @@ var ready = function (f) {
 
 // Create level and show game.
 ready(function () {
-  //loadLevels();
+  loadLevels();
   runGame(levelPlans, DOMDisplay);
 });
 
